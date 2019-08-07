@@ -33,7 +33,9 @@ namespace MVC
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.Configure<SampleWebSettings>(Configuration);
+            //TODO : Dependency injection
+
+            services.Configure<ConfigurationSettings>(Configuration);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDbContext<MVCMovieContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MVCMovieContext")));
