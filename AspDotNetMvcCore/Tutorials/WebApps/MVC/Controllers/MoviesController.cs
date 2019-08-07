@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using MVC.Models;
 
 namespace MVC.Controllers
@@ -12,15 +13,18 @@ namespace MVC.Controllers
     public class MoviesController : Controller
     {
         private readonly MVCMovieContext _context;
-
-        public MoviesController(MVCMovieContext context)
+        private readonly SampleWebSettings _settings;
+        public MoviesController(MVCMovieContext context, IOptions<SampleWebSettings> options)
         {
             _context = context;
+            _settings = options.Value;
         }
 
         // GET: Movies
         public async Task<IActionResult> Index()
         {
+            var tt = _settings;
+
             return View(await _context.Movie.ToListAsync());
         }
 

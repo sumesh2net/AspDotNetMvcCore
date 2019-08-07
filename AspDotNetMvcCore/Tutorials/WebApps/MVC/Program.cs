@@ -21,7 +21,10 @@ namespace MVC
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+            WebHost.CreateDefaultBuilder(args).ConfigureAppConfiguration((hostingContext, config) => {
+
+                config.AddJsonFile("config.json", optional: false, reloadOnChange: false);
+
+            }).UseStartup<Startup>();
     }
 }
