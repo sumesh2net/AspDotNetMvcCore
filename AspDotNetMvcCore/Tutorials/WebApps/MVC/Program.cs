@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
+//Reference link
+//https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/adding-model?view=aspnetcore-2.2&tabs=visual-studio
+
 namespace MVC
 {
     public class Program
@@ -18,7 +21,10 @@ namespace MVC
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+            WebHost.CreateDefaultBuilder(args).ConfigureAppConfiguration((hostingContext, config) => {
+
+                config.AddJsonFile("config.json", optional: false, reloadOnChange: false);
+
+            }).UseStartup<Startup>();
     }
 }
